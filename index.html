@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acertijos y Juegos de Lógica</title>
+  <style>
+  
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+  letter-spacing: 1px;
+}
+
+.descripcion {
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.6;
+  padding: 0 15px;
+}
+
+.retos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.reto {
+  position: relative;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.reto:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px 4px rgba(0, 123, 255, 0.4); /* resplandor azul */
+}
+
+.reto a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  color: white;
+  position: relative;
+}
+
+.reto .fondo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7; /* transparencia de la imagen */
+  z-index: 0;
+}
+
+.reto h2 {
+  position: relative;
+  z-index: 1;
+  font-size: 1.4em;
+  margin: 0;
+  text-align: center;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* sombra oscura */
+}
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ACERTIJOS Y JUEGOS DE LÓGICA</h1>
+  </header>
+
+  <div class="descripcion">
+    <p><strong>Diviértete dándole al coco</strong></p>
+    <p>Una web orientada a la diversión y pensamiento lógico</p>
+    <p>En esta web encontrarás muchos acertijos de lógica, matemáticos, de ingenio... todo para divertirte, pasar un buen rato con amigos y darle al coco.</p>
+  </div>
+
+<div class="retos">
+  <div class="reto">
+    <a href="reto1.html">
+      <div class="fondo" style="background-image: url('img/1camellos.jpg');"></div>
+      <h2>La herencia del jeque</h2>
+    </a>
+  </div>
+
+  <div class="reto">
+    <a href="reto2.html">
+      <div class="fondo" style="background-image: url('img/2vino.jpg');"></div>
+      <h2>Repartiendo el vino</h2>
+    </a>
+  </div>
+
+  <div class="reto">
+    <a href="reto3.html">
+      <div class="fondo" style="background-image: url('img/3euro.jpg');"></div>
+      <h2>El euro perdido</h2>
+    </a>
+  </div>
+  
+    <div class="reto">
+    <a href="reto4.html">
+      <div class="fondo" style="background-image: url('img/4rio.jpg');"></div>
+      <h2>Cruzando el río</h2>
+    </a>
+  </div>
+  
+  
+  <div class="reto">
+    <a href="reto5.html">
+      <div class="fondo" style="background-image: url('img/5mechas.jpg');"></div>
+      <h2>Midiendo el tiempo</h2>
+    </a>
+  </div>
+  
+    <div class="reto">
+    <a href="reto6.html">
+      <div class="fondo" style="background-image: url('img/6bombilla.jpg');"></div>
+      <h2>¿Qué interruptor enciende la bombilla?</h2>
+    </a>
+  </div>
+  
+  <div class="reto">
+    <a href="reto7.html">
+      <div class="fondo" style="background-image: url('img/7puente.jpg');"></div>
+      <h2>Cruzar el puente</h2>
+    </a>
+  </div>
+  
+    <div class="reto">
+    <a href="reto8.html">
+      <div class="fondo" style="background-image: url('img/8cofres.jpg');"></div>
+      <h2>¿ Dónde está el oro?</h2>
+    </a>
+  </div>
+
+    <div class="reto">
+    <a href="reto9.html">
+      <div class="fondo" style="background-image: url('img/9moneda.jpg');"></div>
+      <h2>¿Cuál es la moneda falsa?</h2>
+    </a>
+  </div>
+
+    <div class="reto">
+    <a href="reto10.html">
+      <div class="fondo" style="background-image: url('img/10sombrero.jpg');"></div>
+      <h2>¿Qué prisionero se salva?</h2>
+    </a>
+  </div>
+  
+  <div class="reto">
+    <a href="reto11.html">
+      <div class="fondo" style="background-image: url('img/11mates.jpg');"></div>
+      <h2>¿Verdadero o falso?</h2>
+    </a>
+  </div>
+ 
+  <div class="reto">
+    <a href="reto12.html">
+      <div class="fondo" style="background-image: url('img/12mosca.jpg');"></div>
+      <h2>La mosca pitagórica</h2>
+    </a>
+  </div>
+ 
+ 
+</div>
+</body>
+</html>
