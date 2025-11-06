@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 14: La contraseña</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { color: #0B9ED9; font-weight: 600; margin-bottom: 10px; }
+    h2 { color: #0077b6; font-weight: 500; margin-bottom: 25px; }
+    p { font-size: 1.05em; line-height: 1.7; text-align: justify; margin-bottom: 25px; }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary { background: #0B9ED9; }
+    .btn-primary:hover { background: #0073b6; transform: translateY(-2px); }
+
+    .btn-secondary { background: #666; }
+    .btn-secondary:hover { background: #444; transform: translateY(-2px); }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    .clave-table {
+        width: 100%;
+        max-width: 400px;
+        margin: 20px auto;
+        border-collapse: collapse;
+        text-align: center;
+    }
+    .clave-table th, .clave-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 1.1em;
+    }
+    .clave-table th {
+        background-color: #0B9ED9;
+        color: white;
+        font-weight: 600;
+    }
+    .solucion-final {
+        font-size: 1.4em;
+        font-weight: 700;
+        color: #E91E63; /* Color de advertencia/solución */
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 14</h1>
+    <h2>La Contraseña 🏰</h2>
+
+    <img src="img/14castillo.jpg" alt="Acertijo de la contraseña del castillo">
+
+    <p>
+      El valiente caballero sucumbió a un error muy común en los acertijos: 
+      confiar en una regla sencilla (dividir por dos) que solo funcionaba 
+      por **pura casualidad** en los dos primeros ejemplos.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>La clave está en las palabras, no en los números:</strong></p>
+
+      <p>
+        La contraseña no tiene nada que ver con operaciones matemáticas. La regla es: 
+        la respuesta debe ser la **cantidad de letras** que tiene el número 
+        dicho por el vigilante, escrito en español.
+      </p>
+
+      <table class="clave-table">
+          <thead>
+              <tr>
+                  <th>Vigilante dice (Número)</th>
+                  <th>Número escrito</th>
+                  <th>Contraseña correcta (Letras)</th>
+                  <th>Contraseña del Caballero</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>8</td>
+                  <td>Ocho</td>
+                  <td>4</td>
+                  <td>4 (Coincidencia)</td>
+              </tr>
+              <tr>
+                  <td>14</td>
+                  <td>Catorce</td>
+                  <td>7</td>
+                  <td>7 (Coincidencia)</td>
+              </tr>
+              <tr>
+                  <td>12</td>
+                  <td>Doce</td>
+                  <td>4</td>
+                  <td>6 (¡Error fatal!)</td>
+              </tr>
+          </tbody>
+      </table>
+      
+      <p style="text-align: center; margin-top: 30px;">
+        El caballero pensó que la respuesta a **12** era **6** ($12 \div 2$).
+      </p>
+
+      <div class="solucion-final">
+        <p style="text-align: center;">La respuesta correcta para "12" era **4** (por las letras de la palabra "doce").</p>
+      </div>
+
+    </div>
+
+    <p>
+      El caballero, al contestar "6", selló su destino. Para este tipo de retos, siempre hay que buscar una regla que se cumpla en **todos** los ejemplos. ✅
+    </p>
+
+    <div>
+      <a href="reto14.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 ¡Cuidado con las trampas en la lógica inicial!
+    </div>
+  </div>
+
+</body>
+</html>

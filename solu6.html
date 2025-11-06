@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 6: La bombilla</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #0B9ED9;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0077b6;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1.05em;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 25px;
+    }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #0B9ED9;
+    }
+    .btn-primary:hover {
+      background: #0073b6;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #666;
+    }
+    .btn-secondary:hover {
+      background: #444;
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 6</h1>
+    <h2>La bombilla 💡</h2>
+
+    <img src="img/6bombilla.jpg" alt="La bombilla">
+
+    <p>
+      Este acertijo requiere un poco de ingenio y el uso del sentido común, combinando <strong>observación y temperatura</strong>.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>La idea clave:</strong> solo podemos subir una vez al ático, pero podemos usar tanto el estado de la bombilla como su temperatura.</p>
+      <ul>
+        <li>Enciende un interruptor (por ejemplo, A) y déjalo unos minutos.</li>
+        <li>Apágalo y enciende otro interruptor (por ejemplo, B).</li>
+        <li>Sube al ático y observa la bombilla:</li>
+        <ul>
+          <li>Si está encendida → es el interruptor B (el que dejaste encendido al subir).</li>
+          <li>Si está apagada pero <strong>caliente</strong> → es el interruptor A (el que encendiste primero y luego apagaste).</li>
+          <li>Si está apagada y <strong>fría</strong> → es el interruptor C (el que no tocaste).</li>
+        </ul>
+      </ul>
+    </div>
+
+    <p>
+      De esta manera, usando <strong>un solo viaje al ático</strong>, puedes identificar correctamente cuál interruptor controla la bombilla. ✅
+    </p>
+
+    <div>
+      <a href="reto6.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 A veces la solución está en pensar más allá de lo obvio 😉
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 12: La mosca pitagórica</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { color: #0B9ED9; font-weight: 600; margin-bottom: 10px; }
+    h2 { color: #0077b6; font-weight: 500; margin-bottom: 25px; }
+    p { font-size: 1.05em; line-height: 1.7; text-align: justify; margin-bottom: 25px; }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary { background: #0B9ED9; }
+    .btn-primary:hover { background: #0073b6; transform: translateY(-2px); }
+
+    .btn-secondary { background: #666; }
+    .btn-secondary:hover { background: #444; transform: translateY(-2px); }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 12</h1>
+    <h2>La mosca pitagórica 🪰📐</h2>
+
+    <img src="img/12mosca.jpg" alt="La mosca en el vaso">
+
+    <p>
+      El problema parece complicado, pero se resuelve “abriendo” el vaso como si fuera un cilindro que se despliega.
+      Así podemos aplicar el Teorema de Pitágoras para encontrar el camino más corto.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>Paso a paso:</strong></p>
+
+      <ul>
+        <li>El vaso tiene una circunferencia de <strong>16 cm</strong>.</li>
+        <li>La mosca y la comida están a <strong>3 cm del borde</strong>, pero en lados opuestos:  
+            la mosca por fuera y la comida por dentro.</li>
+        <li>Si “desenrollamos” el vaso, la circunferencia forma un rectángulo de 16 cm de ancho.</li>
+        <li>La mosca está a 3 cm del borde superior del rectángulo (por fuera).</li>
+        <li>La comida está a 3 cm del borde superior pero en la cara interna → 3 cm más abajo al desplegarlo.</li>
+      </ul>
+
+      <p>
+        Por tanto, la distancia vertical total entre mosca y comida en el rectángulo es:
+      </p>
+
+      <p style="text-align:center;"><strong>3 cm (exterior) + 3 cm (interior) = 6 cm</strong></p>
+
+      <p>La distancia horizontal es la mitad de la circunferencia:</p>
+
+      <p style="text-align:center;"><strong>16 / 2 = 8 cm</strong></p>
+
+      <p>
+        Ahora aplicamos Pitágoras para el camino más corto:
+      </p>
+
+      <p style="text-align:center;">
+        √(8² + 6²) = √(64 + 36) = √100 = <strong>10 cm</strong>
+      </p>
+
+      <p>
+        ✅ <strong>El camino más corto que recorre la mosca es de 10 cm.</strong>
+      </p>
+    </div>
+
+    <p>
+      El truco está en ver el vaso como un cilindro que se abre.  
+      ¡Pitagóras nunca falla! 📏✅
+    </p>
+
+    <div>
+      <a href="reto12.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 A veces, basta con ver el problema desde otra perspectiva 😉
+    </div>
+  </div>
+
+</body>
+</html>

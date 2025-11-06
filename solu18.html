@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 18: Medir el tiempo</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { color: #0B9ED9; font-weight: 600; margin-bottom: 10px; }
+    h2 { color: #0077b6; font-weight: 500; margin-bottom: 25px; }
+    p { font-size: 1.05em; line-height: 1.7; text-align: justify; margin-bottom: 25px; }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary { background: #0B9ED9; }
+    .btn-primary:hover { background: #0073b6; transform: translateY(-2px); }
+
+    .btn-secondary { background: #666; }
+    .btn-secondary:hover { background: #444; transform: translateY(-2px); }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        text-align: center;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+    th {
+        background-color: #0B9ED9;
+        color: white;
+        font-weight: 600;
+    }
+    .destacar {
+        background-color: #ffe0b2;
+        font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 18</h1>
+    <h2>Medir el tiempo ⏲️</h2>
+
+    <img src="img/18relojes.jpg" alt="Relojes de arena de 7 y 11 minutos">
+
+    <p>
+      Este es un reto clásico de lógica temporal. La clave es iniciar ambos relojes 
+      a la vez y utilizar la **diferencia de tiempo (11 - 7 = 4 minutos)** para realizar la medición exacta.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>El Método para los 15 Minutos:</strong></p>
+
+      <table style="max-width: 600px; margin: 25px auto;">
+          <thead>
+              <tr>
+                  <th>Tiempo</th>
+                  <th>Reloj de 7 min</th>
+                  <th>Reloj de 11 min</th>
+                  <th>Acción Clave</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>**0 min**</td>
+                  <td>Lleno (7)</td>
+                  <td>Lleno (11)</td>
+                  <td>Iniciamos ambos a la vez.</td>
+              </tr>
+              <tr>
+                  <td>**7 min**</td>
+                  <td>Vacío (0)</td>
+                  <td>Quedan 4 min</td>
+                  <td>El reloj de 7 min se vacía.</td>
+              </tr>
+              <tr>
+                  <td>**7 min**</td>
+                  <td>**Le damos la vuelta**</td>
+                  <td>Quedan 4 min</td>
+                  <td>Reiniciamos la cuenta de 7 min.</td>
+              </tr>
+              <tr>
+                  <td>**11 min**</td>
+                  <td>Lleva 4 min corriendo (Quedan 3)</td>
+                  <td>Vacío (0)</td>
+                  <td>El reloj de 11 min se vacía.</td>
+              </tr>
+              <tr>
+                  <td>**11 min**</td>
+                  <td class="destacar">**Le damos la vuelta**</td>
+                  <td>Vacío</td>
+                  <td>Reiniciamos el reloj de 7 min, pero solo tiene 3 min de arena caída.</td>
+              </tr>
+              <tr>
+                  <td>**15 min**</td>
+                  <td>Vacío (pasan 4 min)</td>
+                  <td>Vacío</td>
+                  <td class="destacar">Se mide el tiempo total: **11 + 4 = 15**</td>
+              </tr>
+          </tbody>
+      </table>
+
+      <p>
+        El tiempo de **4 minutos** que necesitamos para sumar a los 11 minutos se aísla de la primera diferencia y se mide durante la segunda fase del reloj de 7 minutos.
+      </p>
+
+    </div>
+
+    <p>
+      La solución consiste en usar el residuo de tiempo del reloj de 11 minutos (4 min) como la base para el segundo ciclo del reloj de 7 minutos, sumándolo a los 11 minutos iniciales. ✅
+    </p>
+
+    <div>
+      <a href="reto18.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 La matemática de los relojes de arena se basa en la resta de sus ciclos.
+    </div>
+  </div>
+
+</body>
+</html>

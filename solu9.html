@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 9: La moneda falsa</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #0B9ED9;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #0077b6;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1.05em;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 25px;
+    }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #0B9ED9;
+    }
+    .btn-primary:hover {
+      background: #0073b6;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #666;
+    }
+    .btn-secondary:hover {
+      background: #444;
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 9</h1>
+    <h2>La moneda falsa 🪙</h2>
+
+    <img src="img/9moneda.jpg" alt="Monedas y balanza">
+
+    <p>
+      Este reto es un clásico de deducción usando balanzas: debemos identificar la moneda más ligera con solo dos pesadas.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>Paso a paso:</strong></p>
+      <ul>
+        <li>Divide las 9 monedas en tres grupos de 3 monedas cada uno.</li>
+        <li>Pesa el primer grupo contra el segundo grupo:</li>
+        <ul>
+          <li>Si se equilibran → la moneda falsa está en el tercer grupo.</li>
+          <li>Si no se equilibran → la moneda falsa está en el grupo más ligero.</li>
+        </ul>
+        <li>Ahora solo tenemos 3 monedas posibles. Pesa dos de ellas entre sí:</li>
+        <ul>
+          <li>Si se equilibran → la moneda falsa es la que no pesaste.</li>
+          <li>Si no se equilibran → la más ligera es la moneda falsa.</li>
+        </ul>
+      </ul>
+    </div>
+
+    <p>
+      Con solo <strong>dos pesadas</strong>, ¡la moneda falsa queda identificada! ✅
+    </p>
+
+    <div>
+      <a href="reto9.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 A veces, dividir y conquistar es la clave del éxito 😉
+    </div>
+  </div>
+
+</body>
+</html>

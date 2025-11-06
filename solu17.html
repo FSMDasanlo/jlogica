@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 17: Cobrando impuestos</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #B2FEFA, #0ED2F7);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 { color: #0B9ED9; font-weight: 600; margin-bottom: 10px; }
+    h2 { color: #0077b6; font-weight: 500; margin-bottom: 25px; }
+    p { font-size: 1.05em; line-height: 1.7; text-align: justify; margin-bottom: 25px; }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .explicacion {
+      background: #f5faff;
+      border-left: 4px solid #0B9ED9;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin: 25px auto;
+      text-align: left;
+      max-width: 650px;
+      line-height: 1.7;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary { background: #0B9ED9; }
+    .btn-primary:hover { background: #0073b6; transform: translateY(-2px); }
+
+    .btn-secondary { background: #666; }
+    .btn-secondary:hover { background: #444; transform: translateY(-2px); }
+
+    .footer-note {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    .clave-formula {
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 700;
+        color: #E91E63;
+        margin: 20px 0;
+        padding: 10px;
+        border: 2px dashed #E91E63;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 17</h1>
+    <h2>Cobrando impuestos ⚖️</h2>
+
+    <img src="img/17impuestos.jpg" alt="Acertijo de la balanza con monedas">
+
+    <p>
+      Este desafío requiere una solución elegante basada en la **identificación ponderada**. La clave es asegurar que el resultado de la única pesada nos dé información inequívoca sobre cuál de los 10 pueblos es el tramposo.
+    </p>
+
+    <div class="explicacion">
+      <p><strong>La Estrategia: La Ponderación por Poblado</strong></p>
+
+      <ol>
+        <li>
+            **Numerar y Sacar Monedas:** Se numeran los 10 sacos de los pueblos (del 1 al 10). De cada saco, se saca un número de monedas igual al número del pueblo:
+            <ul>
+                <li>Pueblo 1: Sacamos **1** moneda.</li>
+                <li>Pueblo 2: Sacamos **2** monedas.</li>
+                <li>...</li>
+                <li>Pueblo 10: Sacamos **10** monedas.</li>
+            </ul>
+        </li>
+        <li>
+            **Total de Monedas:** En total, se tienen $$1 + 2 + \dots + 10 = \mathbf{55 \text{ monedas}}$$.
+        </li>
+        <li>
+            **La Pesada Ideal:** Si todas fueran auténticas (10g), el peso total debería ser: $$55 \text{ monedas} \times 10 \text{ g/moneda} = \mathbf{550 \text{ gramos}}$$.
+        </li>
+        <li>
+            **La Única Pesada:** Se pesan las 55 monedas a la vez en la báscula de precisión.
+        </li>
+      </ol>
+
+      <p><strong>El Descubrimiento: El Déficit de Peso</strong></p>
+
+      <p>
+        Puesto que las monedas falsas pesan 1 gramo menos, la **diferencia** entre el peso ideal (550g) y el peso real medido será igual al número de monedas falsas que hay en la muestra.
+      </p>
+
+      <p>
+        Como sacamos el número de monedas exacto al número del pueblo, si el pueblo 7 fuera el tramposo, habrá 7 monedas falsas en la báscula y el déficit será de 7 gramos.
+      </p>
+      
+      <div class="clave-formula">
+        **Déficit (en gramos) = 550g - Peso Real = Número del Pueblo Tramposo**
+      </div>
+
+    </div>
+
+    <p>
+      Gracias a esta estrategia de ponderación, con una única pesada se puede identificar con precisión el pueblo que está engañando al señor feudal. Un verdadero reto de genio. ✅
+    </p>
+
+    <div>
+      <a href="reto17.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 La información desigual conduce a la solución única.
+    </div>
+  </div>
+
+</body>
+</html>
