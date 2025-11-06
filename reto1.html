@@ -1,90 +1,184 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Reto 1 – La herencia del jeque</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto 1 – La herencia del jeque</title>
 
-    header {
-      background: linear-gradient(45deg, #007bff, #00c6ff);
-      color: white;
-      padding: 25px 20px;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
+<!-- Fuente moderna -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    header h1 {
-      margin: 0;
-      font-size: 2em;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #89CFF0, #0066CC);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
 
-    .contenido {
-      max-width: 800px;
-      margin: 30px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+  header h1 {
+    color: #fff;
+    font-size: 2.2em;
+    font-weight: 600;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    margin-bottom: 15px;
+    text-align: center;
+  }
 
-.contenido img {
-  width: 30%;
-  display: block;
-  margin: 0 auto 20px;
-  border-radius: 8px;
-  opacity: 0.85;
-}
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 750px;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+  }
 
-    .contenido h2 {
-      margin-top: 0;
-      color: #007bff;
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    .contenido p {
-      font-size: 0.9em;
-      line-height: 1.6;
-    }
+  .card img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
 
-    .volver {
-      display: block;
-      width: fit-content;
-      margin: 30px auto 0;
-      padding: 10px 20px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
+  .card h2 {
+    color: #0066CC;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
 
-    .volver:hover {
-      background: #0056b3;
-    }
-  </style>
+  .card p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease;
+    margin: 6px;
+  }
+
+  .btn-primary {
+    background: #0066CC;
+    color: white;
+  }
+  .btn-primary:hover {
+    background: #004da3;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: #555;
+    color: white;
+  }
+  .btn-secondary:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  #btn-musica {
+    background: #00b894;
+    color: white;
+  }
+  #btn-musica:hover {
+    background: #009f7d;
+    transform: translateY(-2px);
+  }
+
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Reto 1 – La herencia del jeque</h1>
-  </header>
+<header>
+  <h1>Reto 1 — La herencia del jeque</h1>
+</header>
 
-  <div class="contenido">
-    <img src="img/1camellos.jpg" alt="La herencia del jeque" />
-    <h2>Enunciado del reto</h2>
-    <p>
-       Un jeque fallece dejando 17 camellos a sus tres hijos. Su testamento indica que el primero debe recibir la mitad, el segundo un tercio y el tercero una novena parte. ¿Cómo pueden repartirse los camellos sin partir ninguno?
-    </p>
+<div class="card">
+  <img src="img/1camellos.jpg" alt="La herencia del jeque">
+
+  <h2>¿Cómo repartir los camellos?</h2>
+
+  <p>
+    Un jeque fallece dejando 17 camellos a sus tres hijos. Su testamento indica
+    que el primero debe recibir la mitad, el segundo un tercio y el tercero una
+    novena parte. ¿Cómo pueden repartirse los camellos sin partir ninguno?
+  </p>
+
+  <!-- Música -->
+  <button class="btn" id="btn-musica">🎵 Reproducir música</button>
+
+  <!-- Botones -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btn-solucion">Ver solución 🧠</button>
+    <a class="btn btn-secondary" href="index.html">← Volver</a>
   </div>
+</div>
 
-  <a class="volver" href="index.html">← Volver al índice</a>
+<script>
+  const startTime = Date.now();
+  const unlockTime = 60;
+  const solutionPage = "solu1.html";
+  const btnSol = document.getElementById("btn-solucion");
+  const btnMus = document.getElementById("btn-musica");
+
+  const audio = new Audio("ambiente.mp3");
+  audio.loop = true;
+  let playing = false;
+
+  btnMus.addEventListener("click", () => {
+    if (!playing) {
+      audio.play();
+      btnMus.textContent = "⏸️ Pausar música";
+      playing = true;
+    } else {
+      audio.pause();
+      btnMus.textContent = "🎵 Reproducir música";
+      playing = false;
+    }
+  });
+
+  setTimeout(() => {
+    btnSol.textContent = "✅ Ya puedes ver la solución";
+    btnSol.style.background = "#00C851"; // Verde desbloqueo
+  }, unlockTime * 1000);
+
+  btnSol.addEventListener("click", () => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+
+    if (elapsed < unlockTime) {
+      if (!confirm(`🕑 Solo han pasado ${elapsed}s\n🤔 ¡Piensa un poco más!\n\n¿Ver solución igualmente?`)) return;
+    }
+
+    localStorage.setItem("tiempo_reto1", elapsed);
+    window.location.href = solutionPage;
+  });
+</script>
 
 </body>
 </html>

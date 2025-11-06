@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Solución – Reto 5: Medir 45 minutos</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #e6fff7;
+      --bg2: #b8f2e6;
+      --accent: #0aa68b;
+      --card: #ffffff;
+      --muted: #5a6b6a;
+      --rope:#6b4b3a; --ash:#e0e0e0; --flame:#ff6f3c;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#123;
+    }
+
+    .card{
+      max-width:840px;
+      width:100%;
+      background:var(--card);
+      border-radius:18px;
+      padding:34px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.12);
+      animation:fadeIn .45s ease;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+    header h1{
+      margin:0;
+      color:var(--accent);
+      font-size:1.9rem;
+      font-weight:600;
+      text-align:center;
+    }
+    header p.lead{ margin:10px 0 20px; text-align:center; color:var(--muted) }
+
+    .visual{ display:flex; gap:18px; align-items:center; justify-content:center; margin-bottom:18px; flex-wrap:wrap }
+    .visual img{ width:220px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08) }
+
+    .section-title{ color:#0b9e85; font-weight:600; margin:18px 0 8px; text-align:left }
+    .explain{ line-height:1.6; color:#233; margin-bottom:14px; text-align:justify }
+
+    ol.steps{ padding-left:18px; margin:0 0 16px 0; counter-reset:step }
+    ol.steps li{ margin:12px 0; background:#f7fffb; border-left:4px solid var(--accent); padding:12px 14px; border-radius:8px }
+
+    .state{ display:inline-block; font-family:monospace; background:#fff; border:1px solid #eaf7f3; padding:8px 12px; border-radius:8px; margin-top:8px }
+
+    .note{ font-size:0.95rem; color:var(--muted); margin-top:12px }
+
+    .btn-row{ display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap }
+    .btn{ border:none; padding:12px 20px; border-radius:10px; cursor:pointer; font-weight:600; color:white; background:var(--accent); text-decoration:none; transition:transform .15s ease, box-shadow .15s ease }
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(10,166,139,0.16) }
+    .btn.secondary{ background:#59616a }
+
+    .footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:0.9rem }
+    @media (max-width:640px){ .visual img{ width:160px } .card{ padding:20px } }
+
+    /* Visual mechas */
+    svg{ width:100%; height:auto; margin-top:16px }
+    .rope{ stroke:var(--rope); stroke-width:12; stroke-linecap:round; fill:none }
+    .ash{ stroke:var(--ash); stroke-width:12; stroke-linecap:round }
+    .flame{ fill:var(--flame); opacity:0 }
+    
+    .burn-left .flame-left,
+    .burn-right .flame-right,
+    .burn-both .flame-left,
+    .burn-both .flame-right{ opacity:1; animation:flameFlicker .3s infinite }
+    
+    .burnt-out .flame { opacity: 0 !important; }
+
+    @keyframes flameFlicker{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.05)}100%{transform:translateY(0) scale(1)}}
+
+    .controls { text-align:center; margin-top:14px }
+    .timer { text-align:center; margin-top:6px; font-weight:600; color:#066 }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+	<h1>Solución del Reto 5</h1>
+      <p class="lead">Medir 45 minutos con dos mechas que tardan 1 hora cada una</p>
+    </header>
+
+    <div class="visual">
+      <img src="img/5mechas.jpg" alt="Mechas y cerillas">
+    </div>
+
+    <h3 class="section-title">Animación explicativa</h3>
+    <p class="explain">
+      Esta simulación representa la lógica del tiempo usando una mecha **regular**. 
+      La Mecha A (arriba) arde en 30 min al estar encendida por ambos extremos.
+      La Mecha B (abajo) arde exactamente **hasta la mitad (50%)** en 30 min por la izquierda, y **continúa ardiendo** por ambos extremos en la segunda fase hasta su consumo total.
+	  O sea, +15 minutos. ( 30+15=45)
+    </p>
+
+    <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="clipA-left"><rect id="A-left-mask"   x="0"   y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipA-right"><rect id="A-right-mask"  x="350" y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipB-left"><rect id="B-left-mask"   x="0"   y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipB-right"><rect id="B-right-mask"  x="350" y="-20" width="350" height="40"/></clipPath>
+      </defs>
+
+      <g id="mechaA" transform="translate(50,70)">
+        <line class="ash" x1="0" y1="0" x2="700" y2="0"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipA-left)"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipA-right)"/>
+        <circle class="flame flame-left"  cx="0"   cy="0" r="10"/>
+        <circle class="flame flame-right" cx="700" cy="0" r="10"/>
+        <text x="350" y="30" text-anchor="middle" fill="#555" font-size="14">Mecha A</text>
+      </g>
+
+      <g id="mechaB" transform="translate(50,160)">
+        <line class="ash" x1="0" y1="0" x2="700" y2="0"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipB-left)"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipB-right)"/>
+        <circle class="flame flame-left"  cx="0"   cy="0" r="10"/>
+        <circle class="flame flame-right" cx="700" cy="0" r="10"/>
+        <text x="350" y="30" text-anchor="middle" fill="#555" font-size="14">Mecha B</text>
+      </g>
+    </svg>
+
+    <div class="controls">
+      <button class="btn" id="startBtn">▶ Iniciar demo</button>
+      <button class="btn secondary" id="resetBtn" disabled>↺ Reiniciar</button>
+    </div>
+    <div class="timer" id="timer">Tiempo simulado: 0 / 45 min</div>
+
+    <h3 class="section-title">Idea clave</h3>
+    <p class="explain">
+     Sabemos que cada mecha una tarda exactamente <strong>1 hora</strong> en consumirse por completo.
+      La técnica aprovecha que al encender una mecha por ambos extremos su tiempo de combustión se reduce a la mitad, independientemente de la velocidad local de combustión.
+    </p>
+
+    <h3 class="section-title">Pasos</h3>
+    <ol class="steps">
+      <li>
+        <strong>1.</strong> Enciende la <strong>Mecha A</strong> por <em>ambos extremos</em>, y la <strong>Mecha B</strong> por <em>un extremo</em> al mismo tiempo.<br>
+        <div class="state">Inicio → A: ambos extremos encendidos | B: un extremo encendido</div>
+      </li>
+
+      <li>
+        <strong>2.</strong> La <strong>Mecha A</strong> se consumirá completamente en <strong>30 minutos</strong>.
+      </li>
+
+      <li>
+        <strong>3.</strong> En el momento en que A se apaga (30 minutos), <strong>enciende el otro extremo de la Mecha B</strong>.
+      </li>
+
+      <li>
+        <strong>4.</strong> El material restante de B se quema en **15 minutos** al arder por ambos lados.
+      </li>
+    </ol>
+
+    <p class="explain">
+      Total: <strong>30 min</strong> (cuando A se acaba) + <strong>15 min</strong> (lo que tarda B en consumirse) = <strong>45 minutos</strong> exactos.
+    </p>
+
+    <div class="note">
+      📝 <strong>Nota importante:</strong> Esta simula<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Solución – Reto 5: Medir 45 minutos</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #e6fff7;
+      --bg2: #b8f2e6;
+      --accent: #0aa68b;
+      --card: #ffffff;
+      --muted: #5a6b6a;
+      --rope:#6b4b3a; --ash:#e0e0e0; --flame:#ff6f3c;
+    }
+    html,body{height:100%;margin:0}
+	
+body{
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  padding:24px;
+  color:#123;
+  display: block; /* Por claridad, aunque es el valor por defecto */
+}
+.card{
+  max-width:840px;
+  width:100%;
+  background:var(--card);
+  border-radius:18px;
+  padding:34px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+  animation:fadeIn .45s ease;
+
+  margin: 0 auto;   /* ✅ Esto centra horizontalmente la tarjeta */
+}
+
+
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+    header h1{
+      margin:0;
+      color:var(--accent);
+      font-size:1.9rem;
+      font-weight:600;
+      text-align:center;
+    }
+    header p.lead{ margin:10px 0 20px; text-align:center; color:var(--muted) }
+
+    .visual{ display:flex; gap:18px; align-items:center; justify-content:center; margin-bottom:18px; flex-wrap:wrap }
+    .visual img{ width:220px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08) }
+
+    .section-title{ color:#0b9e85; font-weight:600; margin:18px 0 8px; text-align:left }
+    .explain{ line-height:1.6; color:#233; margin-bottom:14px; text-align:justify }
+
+    ol.steps{ padding-left:18px; margin:0 0 16px 0; counter-reset:step }
+    ol.steps li{ margin:12px 0; background:#f7fffb; border-left:4px solid var(--accent); padding:12px 14px; border-radius:8px }
+
+    .state{ display:inline-block; font-family:monospace; background:#fff; border:1px solid #eaf7f3; padding:8px 12px; border-radius:8px; margin-top:8px }
+
+    .note{ font-size:0.95rem; color:var(--muted); margin-top:12px }
+
+    .btn-row{ display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap }
+    .btn{ border:none; padding:12px 20px; border-radius:10px; cursor:pointer; font-weight:600; color:white; background:var(--accent); text-decoration:none; transition:transform .15s ease, box-shadow .15s ease }
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(10,166,139,0.16) }
+    .btn.secondary{ background:#59616a }
+
+    .footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:0.9rem }
+    @media (max-width:640px){ .visual img{ width:160px } .card{ padding:20px } }
+
+    /* Visual mechas */
+    svg{ width:100%; height:auto; margin-top:16px }
+    .rope{ stroke:var(--rope); stroke-width:12; stroke-linecap:round; fill:none }
+    .ash{ stroke:var(--ash); stroke-width:12; stroke-linecap:round }
+    .flame{ fill:var(--flame); opacity:0 }
+    
+    .burn-left .flame-left,
+    .burn-right .flame-right,
+    .burn-both .flame-left,
+    .burn-both .flame-right{ opacity:1; animation:flameFlicker .3s infinite }
+    
+    .burnt-out .flame { opacity: 0 !important; }
+
+    @keyframes flameFlicker{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.05)}100%{transform:translateY(0) scale(1)}}
+
+    .controls { text-align:center; margin-top:14px }
+    .timer { text-align:center; margin-top:6px; font-weight:600; color:#066 }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <header>
+	<h1>Solución del Reto 5</h1>
+      <p class="lead">Medir 45 minutos con dos mechas que tardan 1 hora en consumirse cada una</p>
+    </header>
+
+    <div class="visual">
+      <img src="img/5mechas.jpg" alt="Mechas y cerillas">
+    </div>
+
+    <h3 class="section-title">Animación explicativa</h3>
+    <p class="explain">
+      Esta simulación representa la lógica del tiempo usando una mecha **regular**. 
+      La Mecha A (arriba) arde en 30 min al estar encendida por ambos extremos.
+      La Mecha B (abajo) arde exactamente **hasta la mitad (50%)** en 30 min por la izquierda, y **continúa ardiendo** por ambos extremos en la segunda fase hasta su consumo total.
+	  O sea, +15 minutos. ( 30+15=45)
+    </p>
+
+    <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="clipA-left"><rect id="A-left-mask"   x="0"   y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipA-right"><rect id="A-right-mask"  x="350" y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipB-left"><rect id="B-left-mask"   x="0"   y="-20" width="350" height="40"/></clipPath>
+        <clipPath id="clipB-right"><rect id="B-right-mask"  x="350" y="-20" width="350" height="40"/></clipPath>
+      </defs>
+
+      <g id="mechaA" transform="translate(50,70)">
+        <line class="ash" x1="0" y1="0" x2="700" y2="0"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipA-left)"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipA-right)"/>
+        <circle class="flame flame-left"  cx="0"   cy="0" r="10"/>
+        <circle class="flame flame-right" cx="700" cy="0" r="10"/>
+        <text x="350" y="30" text-anchor="middle" fill="#555" font-size="14">Mecha A</text>
+      </g>
+
+      <g id="mechaB" transform="translate(50,160)">
+        <line class="ash" x1="0" y1="0" x2="700" y2="0"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipB-left)"/>
+        <line class="rope" x1="0" y1="0" x2="700" y2="0" clip-path="url(#clipB-right)"/>
+        <circle class="flame flame-left"  cx="0"   cy="0" r="10"/>
+        <circle class="flame flame-right" cx="700" cy="0" r="10"/>
+        <text x="350" y="30" text-anchor="middle" fill="#555" font-size="14">Mecha B</text>
+      </g>
+    </svg>
+
+    <div class="controls">
+      <button class="btn" id="startBtn">▶ Iniciar demo</button>
+      <button class="btn secondary" id="resetBtn" disabled>↺ Reiniciar</button>
+    </div>
+    <div class="timer" id="timer">Tiempo simulado: 0 / 45 min</div>
+
+    <h3 class="section-title">Idea clave</h3>
+    <p class="explain">
+     Sabemos que cada mecha tarda exactamente <strong>1 hora</strong> en consumirse por completo.
+     Al encender una mecha por ambos extremos su tiempo de combustión se reduce a la mitad.
+    </p>
+
+    <h3 class="section-title">Pasos</h3>
+    <ol class="steps">
+      <li>
+        <strong>1.</strong> Enciende la <strong>Mecha A</strong> por <em>ambos extremos</em>, y la <strong>Mecha B</strong> por <em>un extremo</em> al mismo tiempo.<br>
+        <div class="state">Inicio → A: ambos extremos encendidos | B: un extremo encendido</div>
+      </li>
+
+      <li>
+        <strong>2.</strong> La <strong>Mecha A</strong> se consumirá completamente en <strong>30 minutos</strong>.
+      </li>
+
+      <li>
+        <strong>3.</strong> En el momento en que A se apaga (30 minutos), <strong>enciende el otro extremo de la Mecha B</strong>.
+      </li>
+
+      <li>
+        <strong>4.</strong> El material restante de B se quema en **15 minutos** al arder por ambos lados.
+      </li>
+    </ol>
+
+    <p class="explain">
+      Total: <strong>30 min</strong> (cuando A se acaba) + <strong>15 min</strong> (lo que tarda B en consumirse) = <strong>45 minutos</strong> exactos.
+    </p>
+
+    <div class="note">
+      📝 <strong>Nota importante:</strong> Esta simulación usa una mecha B regular (50% de longitud en 30 min) para que sea más fácil de entender visualmente.
+    </div>
+
+    <div class="btn-row">
+      <a href="reto5.html" class="btn">← Volver al reto</a>
+      <a href="index.html" class="btn secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer">
+      🔥 Ingenio clásico — simple y efectivo.
+    </div>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const timerEl = document.getElementById('timer');
+
+    // Máscaras
+    const A_L = document.getElementById('A-left-mask');
+    const A_R = document.getElementById('A-right-mask');
+    const B_L = document.getElementById('B-left-mask');
+    const B_R = document.getElementById('B-right-mask');
+
+    // Grupos
+    const gA = document.getElementById('mechaA');
+    const gB = document.getElementById('mechaB');
+
+    // Geometría
+    const FULL = 700, HALF = 350;
+
+    // Tiempos simulados (1 s = 1 min)
+    const T_A = 30, T_B2 = 15, TOTAL = 45;
+
+    let startTime, raf;
+
+    // --- FUNCIONES DE MÁSCARA (Restauradas a la versión original) ---
+
+    // Esta máscara controla la MITAD IZQUIERDA (de 0 a 350)
+    // 'burn' es la longitud quemada desde la izquierda (0)
+    function setMaskLeft(rect, burn){
+      const x = Math.min(HALF, Math.max(0, burn));
+      rect.setAttribute('x', x);
+      rect.setAttribute('width', HALF - x);
+    }
+    
+    // Esta máscara controla la MITAD DERECHA (de 350 a 700)
+    // 'burn' es la longitud quemada desde la derecha (700)
+    function setMaskRight(rect, burn){
+      const w = Math.max(0, HALF - burn);
+      rect.setAttribute('x', HALF);
+      rect.setAttribute('width', w);
+    }
+    
+    // --- NUEVA FUNCIÓN ---
+    // Esta función especial controla la MITAD DERECHA de la Mecha B
+    // cuando está ardiendo desde AMBOS lados (desde 350 y desde 700)
+    function setMaskConverging(rect, progress){
+      // progress (p2) va de 0 a 1
+      // La mitad derecha (longitud 350) se quema por ambos lados
+      // Cada llama consume 175 (HALF / 2)
+      const burnAmount = (HALF / 2) * progress;
+      
+      const newX = HALF + burnAmount; // El borde izquierdo (en 350) avanza
+      const newWidth = HALF - (burnAmount * 2); // El ancho total se reduce por 2
+      
+      rect.setAttribute('x', newX);
+      rect.setAttribute('width', Math.max(0, newWidth));
+    }
+
+    // -----------------------------------------------------------------
+
+    function reset(){
+      cancelAnimationFrame(raf);
+      timerEl.textContent = 'Tiempo simulado: 0 / 45 min';
+
+      setMaskLeft(A_L, 0);
+      setMaskRight(A_R, 0);
+      setMaskLeft(B_L, 0);
+      setMaskRight(B_R, 0);
+
+      gA.classList.remove('burn-both', 'burnt-out');
+      gB.classList.remove('burn-left','burn-both', 'burnt-out'); 
+
+      startBtn.disabled = false;
+      resetBtn.disabled = true;
+    }
+
+    function animate(now){
+      const elapsedS = (now - startTime) / 1000;
+      const t = Math.min(elapsedS, TOTAL);
+      timerEl.textContent = `Tiempo simulado: ${Math.floor(t)} / 45 min`;
+
+      // === Mecha A (FUNCIONA CORRECTAMENTE) ===
+      if (t <= T_A){
+        const p = t / T_A;
+        const burn = HALF * p;
+        setMaskLeft(A_L, burn);
+        setMaskRight(A_R, burn);
+      } else {
+        setMaskLeft(A_L, HALF); 
+        setMaskRight(A_R, HALF); 
+        gA.classList.add('burnt-out');
+      }
+
+      // === Mecha B (LÓGICA CORREGIDA) ===
+      if (t <= T_A){
+        // 0-30: solo izquierda. Quema 50% de longitud (la mitad izquierda)
+        const p = t / T_A; 
+        const burnL = HALF * p; 
+        setMaskLeft(B_L, burnL); // La mitad izquierda se consume
+        setMaskRight(B_R, 0);   // La mitad derecha intacta
+      } else {
+        // 30-45: ambos extremos.
+        const p2 = Math.min(1, (t - T_A) / T_B2); // Progreso 0..1 en los últimos 15 minutos
+        
+        // 1. Quema izquierda: Ya quemó la mitad. Se mantiene consumida.
+        setMaskLeft(B_L, HALF);
+        
+        // 2. Quema derecha: La mitad derecha (B_R) se quema por ambos lados.
+        // Usamos la nueva función 'setMaskConverging'
+        setMaskConverging(B_R, p2);
+
+        // Apagar la llama de B cuando se termina
+        if (p2 >= 1) {
+            gB.classList.add('burnt-out');
+        }
+      }
+
+      if (t < TOTAL){ raf = requestAnimationFrame(animate); }
+      else { 
+        resetBtn.disabled = false;
+        gA.classList.add('burnt-out');
+        gB.classList.add('burnt-out');
+      }
+    }
+
+    function startDemo(){
+      startBtn.disabled = true;
+      resetBtn.disabled = false;
+
+      gA.classList.add('burn-both');
+      gB.classList.add('burn-left');
+
+      startTime = performance.now();
+      raf = requestAnimationFrame(animate);
+
+      // A los 30 min simulados (T_A), encender derecha de B
+      setTimeout(()=>{
+        gB.classList.add('burn-both');
+      }, T_A * 1000); 
+    }
+
+    startBtn.addEventListener('click', startBtn.disabled ? null : startDemo);
+    resetBtn.addEventListener('click', reset);
+    reset();
+  </script>
+</body>
+</html>ción usa una mecha B regular (50% de longitud en 30 min) para que sea más fácil de entender visualmente.
+    </div>
+
+    <div class="btn-row">
+      <a href="reto5.html" class="btn">← Volver al reto</a>
+      <a href="index.html" class="btn secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer">
+      🔥 Ingenio clásico — simple y efectivo.
+    </div>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const timerEl = document.getElementById('timer');
+
+    // Máscaras
+    const A_L = document.getElementById('A-left-mask');
+    const A_R = document.getElementById('A-right-mask');
+    const B_L = document.getElementById('B-left-mask');
+    const B_R = document.getElementById('B-right-mask');
+
+    // Grupos
+    const gA = document.getElementById('mechaA');
+    const gB = document.getElementById('mechaB');
+
+    // Geometría
+    const FULL = 700, HALF = 350;
+
+    // Tiempos simulados (1 s = 1 min)
+    const T_A = 30, T_B2 = 15, TOTAL = 45;
+
+    let startTime, raf;
+
+    // --- FUNCIONES DE MÁSCARA (Restauradas a la versión original) ---
+
+    // Esta máscara controla la MITAD IZQUIERDA (de 0 a 350)
+    // 'burn' es la longitud quemada desde la izquierda (0)
+    function setMaskLeft(rect, burn){
+      const x = Math.min(HALF, Math.max(0, burn));
+      rect.setAttribute('x', x);
+      rect.setAttribute('width', HALF - x);
+    }
+    
+    // Esta máscara controla la MITAD DERECHA (de 350 a 700)
+    // 'burn' es la longitud quemada desde la derecha (700)
+    function setMaskRight(rect, burn){
+      const w = Math.max(0, HALF - burn);
+      rect.setAttribute('x', HALF);
+      rect.setAttribute('width', w);
+    }
+    
+    // --- NUEVA FUNCIÓN ---
+    // Esta función especial controla la MITAD DERECHA de la Mecha B
+    // cuando está ardiendo desde AMBOS lados (desde 350 y desde 700)
+    function setMaskConverging(rect, progress){
+      // progress (p2) va de 0 a 1
+      // La mitad derecha (longitud 350) se quema por ambos lados
+      // Cada llama consume 175 (HALF / 2)
+      const burnAmount = (HALF / 2) * progress;
+      
+      const newX = HALF + burnAmount; // El borde izquierdo (en 350) avanza
+      const newWidth = HALF - (burnAmount * 2); // El ancho total se reduce por 2
+      
+      rect.setAttribute('x', newX);
+      rect.setAttribute('width', Math.max(0, newWidth));
+    }
+
+    // -----------------------------------------------------------------
+
+    function reset(){
+      cancelAnimationFrame(raf);
+      timerEl.textContent = 'Tiempo simulado: 0 / 45 min';
+
+      setMaskLeft(A_L, 0);
+      setMaskRight(A_R, 0);
+      setMaskLeft(B_L, 0);
+      setMaskRight(B_R, 0);
+
+      gA.classList.remove('burn-both', 'burnt-out');
+      gB.classList.remove('burn-left','burn-both', 'burnt-out'); 
+
+      startBtn.disabled = false;
+      resetBtn.disabled = true;
+    }
+
+    function animate(now){
+      const elapsedS = (now - startTime) / 1000;
+      const t = Math.min(elapsedS, TOTAL);
+      timerEl.textContent = `Tiempo simulado: ${Math.floor(t)} / 45 min`;
+
+      // === Mecha A (FUNCIONA CORRECTAMENTE) ===
+      if (t <= T_A){
+        const p = t / T_A;
+        const burn = HALF * p;
+        setMaskLeft(A_L, burn);
+        setMaskRight(A_R, burn);
+      } else {
+        setMaskLeft(A_L, HALF); 
+        setMaskRight(A_R, HALF); 
+        gA.classList.add('burnt-out');
+      }
+
+      // === Mecha B (LÓGICA CORREGIDA) ===
+      if (t <= T_A){
+        // 0-30: solo izquierda. Quema 50% de longitud (la mitad izquierda)
+        const p = t / T_A; 
+        const burnL = HALF * p; 
+        setMaskLeft(B_L, burnL); // La mitad izquierda se consume
+        setMaskRight(B_R, 0);   // La mitad derecha intacta
+      } else {
+        // 30-45: ambos extremos.
+        const p2 = Math.min(1, (t - T_A) / T_B2); // Progreso 0..1 en los últimos 15 minutos
+        
+        // 1. Quema izquierda: Ya quemó la mitad. Se mantiene consumida.
+        setMaskLeft(B_L, HALF);
+        
+        // 2. Quema derecha: La mitad derecha (B_R) se quema por ambos lados.
+        // Usamos la nueva función 'setMaskConverging'
+        setMaskConverging(B_R, p2);
+
+        // Apagar la llama de B cuando se termina
+        if (p2 >= 1) {
+            gB.classList.add('burnt-out');
+        }
+      }
+
+      if (t < TOTAL){ raf = requestAnimationFrame(animate); }
+      else { 
+        resetBtn.disabled = false;
+        gA.classList.add('burnt-out');
+        gB.classList.add('burnt-out');
+      }
+    }
+
+    function startDemo(){
+      startBtn.disabled = true;
+      resetBtn.disabled = false;
+
+      gA.classList.add('burn-both');
+      gB.classList.add('burn-left');
+
+      startTime = performance.now();
+      raf = requestAnimationFrame(animate);
+
+      // A los 30 min simulados (T_A), encender derecha de B
+      setTimeout(()=>{
+        gB.classList.add('burn-both');
+      }, T_A * 1000); 
+    }
+
+    startBtn.addEventListener('click', startBtn.disabled ? null : startDemo);
+    resetBtn.addEventListener('click', reset);
+    reset();
+  </script>
+</body>
+</html>

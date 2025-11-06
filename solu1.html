@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 1: La herencia del jeque</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #3A4ED5;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #007bff;
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    p {
+      font-size: 1.05em;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 25px;
+    }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #3A4ED5;
+    }
+    .btn-primary:hover {
+      background: #2d3bb3;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #666;
+    }
+    .btn-secondary:hover {
+      background: #444;
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 1</h1>
+    <h2>La herencia del jeque</h2>
+
+    <img src="img/1camellos.jpg" alt="Camellos del jeque">
+
+    <p>
+      El truco está en pedir prestado un camello más, sumando un total de 18.
+      <br><br>
+      • El primer hijo recibe la mitad: 9 camellos.<br>
+      • El segundo recibe un tercio: 6 camellos.<br>
+      • El tercero recibe una novena parte: 2 camellos.<br><br>
+      9 + 6 + 2 = 17 camellos, y el camello prestado se devuelve al final.
+      <br><br>
+      Así, todos reciben la cantidad justa sin partir ninguno 🐪.
+    </p>
+
+    <div>
+      <a href="reto1.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      💡 ¡Bien hecho! Si llegaste aquí después de pensar más de un minuto, ¡eres todo un genio lógico!
+    </div>
+  </div>
+
+</body>
+</html>

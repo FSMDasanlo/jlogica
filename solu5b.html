@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Solución – Reto 5: Medir 45 minutos</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #e6fff7;
+      --bg2: #b8f2e6;
+      --accent: #0aa68b;
+      --card: #ffffff;
+      --muted: #5a6b6a;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#123;
+    }
+
+    .card{
+      max-width:840px;
+      width:100%;
+      background:var(--card);
+      border-radius:18px;
+      padding:34px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.12);
+      animation:fadeIn .45s ease;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+    header h1{
+      margin:0;
+      color:var(--accent);
+      font-size:1.9rem;
+      font-weight:600;
+      text-align:center;
+    }
+    header p.lead{ margin:10px 0 20px; text-align:center; color:var(--muted) }
+
+    .visual{ display:flex; gap:18px; align-items:center; justify-content:center; margin-bottom:18px; flex-wrap:wrap }
+    .visual img{ width:220px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.08) }
+
+    .section-title{ color:#0b9e85; font-weight:600; margin:18px 0 8px; text-align:left }
+    .explain{ line-height:1.6; color:#233; margin-bottom:14px; text-align:justify }
+
+    ol.steps{ padding-left:18px; margin:0 0 16px 0; counter-reset:step }
+    ol.steps li{ margin:12px 0; background:#f7fffb; border-left:4px solid var(--accent); padding:12px 14px; border-radius:8px }
+
+    .state{ display:inline-block; font-family:monospace; background:#fff; border:1px solid #eaf7f3; padding:8px 12px; border-radius:8px; margin-top:8px }
+
+    .note{ font-size:0.95rem; color:var(--muted); margin-top:12px }
+
+    .btn-row{ display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap }
+    .btn{ border:none; padding:12px 20px; border-radius:10px; cursor:pointer; font-weight:600; color:white; background:var(--accent); text-decoration:none; transition:transform .15s ease, box-shadow .15s ease }
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(10,166,139,0.16) }
+    .btn.secondary{ background:#59616a }
+
+    .footer{ text-align:center; margin-top:14px; color:var(--muted); font-size:0.9rem }
+    @media (max-width:640px){ .visual img{ width:160px } .card{ padding:20px } }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <header>
+      <h1>Solución del Reto 5</h1>
+      <p class="lead">Medir 45 minutos con dos mechas que tardan 1 hora cada una (velocidad irregular)</p>
+    </header>
+
+    <div class="visual">
+      <img src="img/5mechas.jpg" alt="Mechas y cerillas">
+    </div>
+
+    <h3 class="section-title">Idea clave</h3>
+    <p class="explain">
+      Aunque las mechas no queman a velocidad uniforme, sí sabemos que cada una tarda exactamente <strong>1 hora</strong> en consumirse por completo.
+      La técnica aprovecha que al encender una mecha por ambos extremos su tiempo de combustión se reduce a la mitad, independientemente de la velocidad local de combustión.
+    </p>
+
+    <h3 class="section-title">Pasos</h3>
+    <ol class="steps">
+      <li>
+        <strong>1.</strong> Enciende la <strong>Mecha A</strong> por <em>ambos extremos</em>, y la <strong>Mecha B</strong> por <em>un extremo</em> al mismo tiempo.<br>
+        <div class="state">Inicio → A: ambos extremos encendidos | B: un extremo encendido</div>
+      </li>
+
+      <li>
+        <strong>2.</strong> La <strong>Mecha A</strong> se consumirá completamente en <strong>30 minutos</strong> (la mitad del tiempo porque arde desde dos extremos).<br>
+        <div class="state">Tras 30 min → A: consumida | B: consumida parcialmente (resto desconocido)</div>
+      </li>
+
+      <li>
+        <strong>3.</strong> En el momento en que A se apaga (es decir, han pasado 30 minutos), <strong>enciende el otro extremo de la Mecha B</strong> (ahora B arderá desde ambos extremos).<br>
+        <div class="state">Momento de encender el 2º extremo de B → B arde desde dos extremos</div>
+      </li>
+
+      <li>
+        <strong>4.</strong> La porción restante de la Mecha B (independientemente de cuánto se haya consumido antes) se quemará en <strong>15 minutos</strong>, porque al encender ambos extremos el tiempo restante se reduce a la mitad.<br>
+        <div class="state">Tiempo adicional tras este punto → 15 minutos</div>
+      </li>
+    </ol>
+
+    <p class="explain">
+      Por tanto: <strong>30 min</strong> (cuando A se acaba) + <strong>15 min</strong> (lo que tarda en consumirse lo que quede de B una vez encendido por ambos extremos) = <strong>45 minutos</strong> exactos.
+    </p>
+
+    <div class="note">
+      📝 <strong>Nota importante:</strong> No es necesario que las mechas tengan una combustión uniforme; la solución funciona porque encender por ambos extremos garantiza que el tiempo total se reduzca a la mitad sin necesidad de conocer la distribución del material.
+    </div>
+
+    <div class="btn-row">
+      <a href="reto5.html" class="btn">← Volver al reto</a>
+      <a href="index.html" class="btn secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer">
+      🔥 Ingenio clásico — simple y efectivo.
+    </div>
+  </div>
+
+</body>
+</html>

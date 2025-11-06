@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Solución – Reto 4: Cruzando el río</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1: #cfe9ff;
+      --bg2: #9ad0ff;
+      --accent: #1e88e5;
+      --card: #ffffff;
+      --muted: #666;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#222;
+    }
+
+    .card{
+      max-width:860px;
+      width:100%;
+      background:var(--card);
+      border-radius:18px;
+      padding:34px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.12);
+      animation:entry .55s ease;
+    }
+
+    @keyframes entry{
+      from{opacity:0; transform:translateY(12px)}
+      to{opacity:1; transform:none}
+    }
+
+    header h1{
+      margin:0;
+      color:var(--accent);
+      font-size:1.8rem;
+      font-weight:600;
+      text-align:center;
+    }
+
+    header p.lead{
+      margin:10px 0 22px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .visual {
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .visual img{
+      width:220px;
+      border-radius:12px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title{
+      color:#0b61b3;
+      font-weight:600;
+      margin:18px 0 8px;
+      text-align:left;
+    }
+
+    .explain {
+      line-height:1.6;
+      color:#2b3b4a;
+      margin-bottom:14px;
+      text-align:justify;
+    }
+
+    ol.steps{
+      padding-left:18px;
+      margin:0 0 16px 0;
+      counter-reset:step;
+    }
+
+    ol.steps li{
+      margin:12px 0;
+      background:#f7fbff;
+      border-left:4px solid var(--accent);
+      padding:12px 14px;
+      border-radius:8px;
+    }
+
+    .state{
+      display:inline-block;
+      font-family:monospace;
+      background:#ffffff;
+      border:1px solid #e6f0ff;
+      padding:6px 10px;
+      border-radius:8px;
+      margin-top:8px;
+    }
+
+    .note{
+      font-size:0.95rem;
+      color:var(--muted);
+      margin-top:12px;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn {
+      border: none;
+      padding:12px 20px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      color:white;
+      background:var(--accent);
+      text-decoration:none;
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover{ transform:translateY(-3px); box-shadow:0 8px 18px rgba(30,136,229,0.18)}
+    .btn.secondary{ background:#59616a}
+
+    .footer{
+      text-align:center;
+      margin-top:14px;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    @media (max-width:640px){
+      .visual img{ width:160px }
+      .card{ padding:20px }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <header>
+      <h1>Solución del Reto 4</h1>
+      <p class="lead">El pastor, la oveja, la lechuga y el lobo — ¿cómo cruzar sin pérdidas?</p>
+    </header>
+
+    <div class="visual">
+      <img src="img/4rio.jpg" alt="Pastor cruzando el río">
+    </div>
+
+    <h3 class="section-title">Enunciado breve</h3>
+    <p class="explain">
+      El pastor debe llevar a la otra orilla a una <strong>oveja</strong>, una <strong>lechuga</strong> y un <strong>lobo</strong>.
+      Solo puede llevar un elemento a la vez en su barca. Si la oveja y la lechuga se quedan solas sin el pastor, la oveja se come la lechuga.
+      Si el lobo y la oveja quedan solos, el lobo se come a la oveja. Hay que planear los viajes para que nadie sea devorado ni devore.
+    </p>
+
+    <h3 class="section-title">Solución paso a paso (segura)</h3>
+    <ol class="steps">
+      <li>
+        <strong>1.</strong> El pastor cruza llevando a la <strong>oveja</strong> al otro lado.<br>
+        <div class="state">Orilla inicial: (Lobo, Lechuga) — Orilla destino: (Oveja)</div>
+      </li>
+
+      <li>
+        <strong>2.</strong> El pastor regresa solo a la orilla inicial.<br>
+        <div class="state">Orilla inicial: (Lobo, Lechuga) — Orilla destino: (Oveja)</div>
+      </li>
+
+      <li>
+        <strong>3.</strong> El pastor cruza llevando al <strong>lobo</strong> a la otra orilla.<br>
+        Ahora en la orilla destino están (Oveja, Lobo) — ¡peligro! Por eso:
+        <div class="state">Antes de dejar al lobo: (Lobo, Lechuga) — (Oveja)</div>
+      </li>
+
+      <li>
+        <strong>4.</strong> Al llegar con el lobo, <em>no</em> deja al lobo con la oveja: devuelve con él a la orilla inicial la <strong>oveja</strong> (es decir, trae la oveja de vuelta).<br>
+        <div class="state">Orilla inicial: (Oveja, Lechuga) — Orilla destino: (Lobo)</div>
+      </li>
+
+      <li>
+        <strong>5.</strong> El pastor cruza llevando la <strong>lechuga</strong> a la orilla destino (donde está ahora solo el lobo).<br>
+        <div class="state">Orilla inicial: (Oveja) — Orilla destino: (Lobo, Lechuga)</div>
+      </li>
+
+      <li>
+        <strong>6.</strong> El pastor regresa solo a la orilla inicial y recoge la <strong>oveja</strong>, cruzando definitivamente.<br>
+        <div class="state">Orilla inicial: (vacía) — Orilla destino: (Lobo, Lechuga, Oveja)</div>
+      </li>
+    </ol>
+
+    <p class="explain">
+      Con este plan se evita siempre dejar solos a los pares peligrosos (lobo+oveja o oveja+lechuga). La clave es llevar primero la oveja y usarla como "transporte intermedio" para separar lobo y lechuga cuando corresponda.
+    </p>
+
+    <div class="btn-row">
+      <a href="reto4.html" class="btn">← Volver al reto</a>
+      <a href="index.html" class="btn secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer">
+      🧩 Solución clásica — sencilla cuando se piensa en proteger la oveja como prioridad.
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solución – Reto 2: Repartiendo el vino</title>
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #F9D29D, #FF9F62);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      max-width: 800px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease;
+      text-align: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #C0392B;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #E67E22;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.05em;
+      line-height: 1.7;
+      text-align: justify;
+      margin-bottom: 18px;
+    }
+
+    img {
+      width: 45%;
+      border-radius: 15px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    ol {
+      text-align: left;
+      max-width: 680px;
+      margin: 0 auto 20px;
+      line-height: 1.7;
+      padding-left: 20px;
+    }
+
+    .state {
+      font-family: monospace;
+      background: #f6f6f6;
+      border-radius: 8px;
+      padding: 10px;
+      display: inline-block;
+      margin: 8px 0 18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin: 8px;
+      text-decoration: none;
+      display: inline-block;
+      color: white;
+    }
+
+    .btn-primary { background: #C0392B; }
+    .btn-primary:hover { background: #962d21; transform: translateY(-2px); }
+
+    .btn-secondary { background: #666; }
+    .btn-secondary:hover { background: #444; transform: translateY(-2px); }
+
+    .footer-note { font-size: 0.9em; color: #666; margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Solución del Reto 2</h1>
+    <h2>Repartiendo el vino 🍷</h2>
+
+    <img src="img/2vino.jpg" alt="Repartiendo el vino">
+
+    <p>
+      Tenían: un pellejo de <strong>8 L</strong> lleno, y pellejos de <strong>5 L</strong> y <strong>3 L</strong> vacíos.
+      El objetivo: conseguir exactamente <strong>4 L</strong> para cada uno.
+    </p>
+
+    <h3>Pasos correctos (sin desperdiciar vino)</h3>
+
+    <ol>
+      <li>Vierte del 8 → 5  → Estado: <span class="state">(8:3, 5:5, 3:0)</span></li>
+      <li>Vierte del 5 → 3  → Estado: <span class="state">(8:3, 5:2, 3:3)</span></li>
+      <li>Vierte del 3 → 8  → Estado: <span class="state">(8:6, 5:2, 3:0)</span></li>
+      <li>Vierte del 5 → 3  → Estado: <span class="state">(8:6, 5:0, 3:2)</span></li>
+      <li>Vierte del 8 → 5  → Estado: <span class="state">(8:1, 5:5, 3:2)</span></li>
+      <li>Vierte del 5 → 3 (hasta llenar el 3) → Estado: <span class="state">(8:1, 5:4, 3:3)</span></li>
+      <li>Vierte del 3 → 8 → Estado final: <span class="state">(8:4, 5:4, 3:0)</span></li>
+    </ol>
+
+    <p>
+      Resultado: hay <strong>4 L</strong> en el pellejo de 8 y <strong>4 L</strong> en el de 5 — cada hombre puede llevarse sus 4 litros.
+    </p>
+
+    <div>
+      <a href="reto2.html" class="btn btn-primary">← Volver al reto</a>
+      <a href="index.html" class="btn btn-secondary">🏠 Volver al índice</a>
+    </div>
+
+    <div class="footer-note">
+      🧩 Notas: cada "vierte" significa trasladar vino hasta llenar el recipiente destino o vaciar el origen — en ningún momento se descarta vino.
+    </div>
+  </div>
+
+</body>
+</html>
