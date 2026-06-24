@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto 19: El ciego y las píldoras</title>
+
+<!-- Fuente moderna -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #89CFF0, #0066CC);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  header h1 {
+    color: #fff;
+    font-size: 2.2em;
+    font-weight: 600;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .card {
+    background: #fff;
+    width: 100%;
+    max-width: 750px;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .card h2 {
+    color: #0066CC;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    font-size: 1.05em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .btn {
+    padding: 12px 22px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease;
+    margin: 6px;
+  }
+
+  .btn-primary {
+    background: #0066CC;
+    color: white;
+  }
+  .btn-primary:hover {
+    background: #004da3;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: #555;
+    color: white;
+  }
+  .btn-secondary:hover {
+    background: #333;
+    transform: translateY(-2px);
+  }
+
+  #btn-musica {
+    background: #00b894;
+    color: white;
+  }
+  #btn-musica:hover {
+    background: #009f7d;
+    transform: translateY(-2px);
+  }
+
+  .btn-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Reto 19: El ciego y las píldoras</h1>
+</header>
+
+<div class="card">
+  <img src="img/19pastillas.webp" alt="19: El ciego y las píldoras">
+
+  <h2>19: El ciego y las píldoras</h2>
+
+    <p>
+      Un ciego está en una isla desierta y tiene en una caja dos píldoras rojas y dos azules, mezcladas.<br>
+      Debe tomar al mismo tiempo una roja y una azul. De lo contrario, morirá. Por otro lado, también sería fatal que tomara dos rojas o dos azules juntas. Debe realizar este proceso ya mismo.<br><br>
+      ¿Cómo hará, siendo ciego, para tomar una píldora de cada color?<br><br>
+      Las cuatro píldoras son idénticas en todo, salvo en el color; tienen la misma forma, pesan lo mismo, no tienen inscripciones particulares, etc. El ciego está solo, sin compañía y tiene las 4 píldoras mezcladas. Sólo puede pensar y actuar rápido.
+    </p>
+
+  <!-- Música -->
+  <button class="btn" id="btn-musica">🎵 Reproducir música</button>
+
+  <!-- Botones -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btn-solucion">Ver solución 🧠</button>
+    <a class="btn btn-secondary" href="index.html">← Volver</a>
+  </div>
+</div>
+
+<script>
+  const startTime = Date.now();
+  const unlockTime = 60;
+  const solutionPage = "solu19.html";
+  const btnSol = document.getElementById("btn-solucion");
+  const btnMus = document.getElementById("btn-musica");
+
+  const audio = new Audio("ambiente.mp3");
+  audio.loop = true;
+  let playing = false;
+
+  btnMus.addEventListener("click", () => {
+    if (!playing) {
+      audio.play();
+      btnMus.textContent = "⏸️ Pausar música";
+      playing = true;
+    } else {
+      audio.pause();
+      btnMus.textContent = "🎵 Reproducir música";
+      playing = false;
+    }
+  });
+
+  setTimeout(() => {
+    btnSol.textContent = "✅ Ya puedes ver la solución";
+    btnSol.style.background = "#00C851"; // Verde desbloqueo
+  }, unlockTime * 1000);
+
+  btnSol.addEventListener("click", () => {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+
+    if (elapsed < unlockTime) {
+      if (!confirm(`🕑 Solo han pasado ${elapsed}s\n🤔 ¡Piensa un poco más!\n\n¿Ver solución igualmente?`)) return;
+    }
+
+    localStorage.setItem("tiempo_reto1", elapsed);
+    window.location.href = solutionPage;
+  });
+</script>
+
+</body>
+</html>
